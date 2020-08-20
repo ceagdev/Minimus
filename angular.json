@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "Minimus"
+    }
+  },
+  "defaultProject": "Minimus",
+  "cli": {
+    "analytics": false
+  }
 }
