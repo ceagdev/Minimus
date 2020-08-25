@@ -8,6 +8,11 @@ import { WheatherCardComponent } from './ui/wheather-card/wheather-card.componen
 import { AddCardComponent } from './ui/add-card/add-card.component';
 import { DetailsComponent } from './pages/details/details.component';
 import { AddComponent } from './pages/add/add.component';
+import { LoginComponent } from './pages/login/login.component';
+import { SignupComponent } from './pages/signup/signup.component';
+import { UiService } from './services/ui/ui.service';
+import { WeatherService } from './services/weather/weather.service';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -16,13 +21,19 @@ import { AddComponent } from './pages/add/add.component';
     WheatherCardComponent,
     AddCardComponent,
     DetailsComponent,
-    AddComponent
+    AddComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    WeatherService,
+    UiService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

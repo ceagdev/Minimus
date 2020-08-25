@@ -1,15 +1,53 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {WeatherService} from '../../services/weather/weather.service';
+import {UiService} from '../../services/ui/ui.service';
 
 @Component({
-  selector: 'app-wheather-card',
+  selector: 'app-weather-card',
   templateUrl: './wheather-card.component.html',
   styleUrls: ['./wheather-card.component.css']
 })
-export class WheatherCardComponent implements OnInit {
+export class WheatherCardComponent implements OnInit, OnDestroy {
 
-  constructor() { }
+  condition: string;
+  currentTemp: number;
+  maxTemp: number;
+  minTemp: number;
+  darkMode: boolean;
 
-  ngOnInit(): void {
+  constructor(public weather: WeatherService,
+              public router: Router,
+              public ui: UiService) {
+  }
+
+  ngOnInit() {
+    this.ui.darkModeState.subscribe((isDark) => {
+      this.darkMode = isDark;
+    });
+
+    this.weather.getWeatherState('Paris')
+      .subscribe((data: string) => {
+        this.condition = data;
+      });
+
+    this.weather.getCurrentTemp('Paris').subscribe((data: number) => {
+      this.currentTemp = data;
+    });
+    this.weather.getMinTemp('Paris').subscribe((data: number) => {
+      this.minTemp = data;
+    });
+    this.weather.getMaxTemp('Paris').subscribe((data: number) => {
+      this.maxTemp = data;
+    });
+  }
+
+  ngOnDestroy() {
+
+  }
+
+  openDetails() {
+    this.router.navigateByUrl('/details/paris');
   }
 
 }

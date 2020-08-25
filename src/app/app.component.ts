@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log("Iniciando todo");
     this.ui.darkModeState.subscribe((value) => {
       this.darkModeActive = value;
     });
